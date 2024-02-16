@@ -1,0 +1,13 @@
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+body{
+  background-color: rgba(36, 34, 34, 0);
+}
+.main{
+  min-height: 80vh;
+  min-width: 100%;
+
+}
