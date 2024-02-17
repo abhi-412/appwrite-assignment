@@ -43,12 +43,7 @@ const router = createBrowserRouter([
       
         {
             path: "/edit",
-            element: (
-                <AuthLayout authentication>
-                    {" "}
-                    <EditUser />
-                </AuthLayout>
-            ),
+            element: <EditUser />
         },
         {
             path: "/user",

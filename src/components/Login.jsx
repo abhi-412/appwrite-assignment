@@ -31,7 +31,7 @@ function Login() {
     className='flex items-center h-full justify-center w-full'
     >
         <div className=" lg:w-1/3  md:w-1/2 w-10/12 bg-gray-100 rounded-xl p-10 border border-black/10">
-        <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
+        <h2 className="text-center text-2xl font-bold leading-tight">Log in to your account</h2>
         <p className="mt-2 text-center text-base text-black/60">
                     Don&apos;t have any account?&nbsp;
                     <Link

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import appwriteService from "../appwrite/auth";
+import authService from "../appwrite/auth"
 import { Button, Container } from "../components";
 
 import { useSelector } from "react-redux";
@@ -8,17 +8,20 @@ import { useSelector } from "react-redux";
 export default function User() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
-    
-    const userData = useSelector((state) => state.auth.userData);
-
-
 
     useEffect(() => {
-        if (userData) {
-            setUser(userData);
-            console.log(userData);
-        } else navigate("/");
-    }, [navigate,user,userData]);
+        async function getProfile(){
+            let userData = await authService.getCurrentUser();
+           
+            if (userData) {
+                setUser(userData);
+            } else{
+                console.log("navigated");
+                navigate("/");
+            } 
+        }
+        getProfile();
+    }, [navigate]);
 
     return user ? (
         <div className="w-full h-full flex justify-center items-center">
@@ -32,7 +35,7 @@ export default function User() {
                             <div className="name flex flex-col gap-3">
                                 {user.name && <h1 className="name text-xl text-gray-600"><span className="text-gray-500 font-bold">Your Name -</span> {user.name}</h1>}
                                 {user.email && <h1 className="name text-xl text-gray-600"><span className="text-gray-500 font-bold">Your Email -</span> {user.email}</h1>}
-                                {user.phone && <h1 className="name text-xl text-gray-600"><span className="text-gray-500 font-bold">Your Phone -</span> {user.phone ? user.phone : "Not Present"}</h1>}
+                                {user.phone ? <h1 className="name text-xl text-gray-600"><span className="text-gray-500 font-bold">Your Phone -</span> {user.phone ? user.phone : "Not Present"}</h1>:"Edit to save your phone"}
                             </div>
                         </div>
 

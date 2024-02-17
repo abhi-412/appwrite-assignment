@@ -19,7 +19,6 @@ export class AuthService {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name,phone);
             if (userAccount) {
-                // call another method
                 return this.login({email, password});
             } else {
                return  userAccount;
@@ -39,9 +38,7 @@ export class AuthService {
 
     async getCurrentUser() {
         try {
-            let user = await this.account.get();
-            return user;
-            
+            return await this.account.get();
         } catch (error) {
             console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
@@ -49,9 +46,10 @@ export class AuthService {
     }
 
 
+
     async updateEmail(email,password){
         try{
-            this.account.updateEmail(email,password);
+            return await this.account.updateEmail(email,password);
         }catch(error){
             console.log("Appwrite serive :: UpdateEmail :: error", error);
         }
@@ -59,7 +57,8 @@ export class AuthService {
     }
     async updatePhone(phone,password){
         try{
-            this.account.updatePhone(phone,password);
+            let user = await this.account.updatePhone(phone,password);
+            return user
         }catch(error){
             console.log("Appwrite serive :: UpdatePhone :: error", error);
         }
